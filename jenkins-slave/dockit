@@ -1,0 +1,18 @@
+#!/bin/bash
+
+repo_and_name=du6rsy/jenkins-slave-with-foss
+
+build() {
+  local _t=$1
+  [[ -n $_t ]] || _t=$t ;
+  docker build -t $repo_and_name:$_t . ;
+}
+push() {
+  local _t=$1
+  [[ -n $_t ]] || _t=$t ;
+  docker push $repo_and_name:$_t ;
+}
+
+"$@"
+
+#

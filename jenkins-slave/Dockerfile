@@ -1,6 +1,7 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
-FROM ubuntu:trusty
-MAINTAINER Ervin Varga <ervin.varga@gmail.com>
+FROM ubuntu:xenial
+# ORIGINAL MAINTAINER Ervin Varga <ervin.varga@gmail.com>
+MAINTAINER Dian Alves <Du6rsy@outlook.com>
 
 # In case you need proxy
 #RUN echo 'Acquire::http::Proxy "http://127.0.0.1:8080";' >> /etc/apt/apt.conf
@@ -23,12 +24,24 @@ ENV LC_ALL en_US.UTF-8
 
 # Install JDK 7 (latest edition)
 RUN apt-get -q update &&\
-    DEBIAN_FRONTEND="noninteractive" apt-get -q install -y -o Dpkg::Options::="--force-confnew"  --no-install-recommends openjdk-7-jre-headless &&\
+    DEBIAN_FRONTEND="noninteractive" apt-get -q install -y -o Dpkg::Options::="--force-confnew"  --no-install-recommends openjdk-8-jre-headless &&\
     apt-get -q clean -y && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
 # Set user jenkins to the image
 RUN useradd -m -d /home/jenkins -s /bin/sh jenkins &&\
     echo "jenkins:jenkins" | chpasswd
+
+RUN apt-get update
+RUN apt-get -y install curl
+# # Or install curl manually:
+# RUN apt-get -y install wget
+# RUN mkdir /tmp/curl
+# RUN cd /tmp/curl && wget -q https://curl.haxx.se/download/curl-7.53.1.tar.gz
+# RUN cd /tmp/curl && tar -xzf curl-7.53.1.tar.gz && rm -rf *.tar.gz
+# RUN cd /tmp/curl/curl* && ./configure && make && make install
+# # END
+RUN which curl
+RUN apt-get -y install git zip unzip
 
 # Standard SSH port
 EXPOSE 22
