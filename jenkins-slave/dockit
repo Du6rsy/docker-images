@@ -12,6 +12,14 @@ push() {
   [[ -n $_t ]] || _t=$t ;
   docker push $repo_and_name:$_t ;
 }
+gitit() {
+  local _t=$1
+  [[ -n $_t ]] || _t=$t ;
+  git add Dockerfile dockit ; 
+  git commit -m "$_t" ;
+  git tag -a $_t -m $_t ;
+  git push --tags origin master ;
+}
 
 "$@"
 
