@@ -47,7 +47,9 @@ RUN apt-get -y install curl
 # RUN cd /tmp/curl/curl* && ./configure && make && make install
 # # END
 RUN which curl
-RUN apt-get -y install git zip unzip maven iputils-ping strace python
+# RUN apt-get -y install git zip unzip maven iputils-ping strace python
+RUN apt-get -y install git zip unzip maven iputils-ping strace
+RUN apt-get -y install python
 
 # Standard SSH port
 EXPOSE 22
