@@ -43,7 +43,7 @@ RUN apt-get -y install curl
 # RUN cd /tmp/curl/curl* && ./configure && make && make install
 # # END
 RUN which curl
-RUN apt-get -y install git zip unzip maven iputils-ping
+RUN apt-get -y install git zip unzip maven iputils-ping strace
 
 # Standard SSH port
 EXPOSE 22
