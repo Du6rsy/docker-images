@@ -9,7 +9,9 @@ MAINTAINER Dian Alves <Du6rsy@outlook.com>
 # Add locales after locale-gen as needed
 # Upgrade packages on image
 # Preparations for sshd
-run locale-gen en_US.UTF-8 &&\
+RUN apt-get -y install locales
+# RUN apt-get -y clean && apt-get -y update && apt-get -y install locales
+RUN locale-gen en_US.UTF-8 &&\
     apt-get -q update &&\
     DEBIAN_FRONTEND="noninteractive" apt-get -q upgrade -y -o Dpkg::Options::="--force-confnew" --no-install-recommends &&\
     DEBIAN_FRONTEND="noninteractive" apt-get -q install -y -o Dpkg::Options::="--force-confnew"  --no-install-recommends openssh-server &&\
