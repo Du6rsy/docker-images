@@ -49,10 +49,12 @@ RUN apt-get -y install curl
 RUN which curl
 # RUN apt-get -y install git zip unzip maven iputils-ping strace python
 RUN apt-get -y install git zip unzip maven iputils-ping strace
-RUN apt-get -y install python
+RUN apt-get -y install python make xz-utils vim g++ expect
 
 # Standard SSH port
 EXPOSE 22
 
 # Default command
 CMD ["/usr/sbin/sshd", "-D"]
+
+#
